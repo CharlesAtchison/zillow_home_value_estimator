@@ -25,15 +25,37 @@ def get_zillow_data():
         conn = get_db_url(username=user, password=password, hostname=host, database_name='zillow')
         
         sql = '''
-        select bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet,
-        taxvaluedollarcnt, yearbuilt, taxamount, fips, regionidzip, regionidcity, lotsizesquarefeet, latitude, longitude, transactiondate
-        from properties_2017
-        join propertylandusetype
-        on propertylandusetype.propertylandusetypeid = properties_2017.propertylandusetypeid
-        and propertylandusetype.propertylandusetypeid in (261, 279, 266, 262, 263, 276, 275, 273, 271, 264, 260)
-        join predictions_2017
-        on predictions_2017.parcelid = properties_2017.parcelid
-        and predictions_2017.transactiondate between '2017-05-01' and '2017-08-31'
+        SELECT properties_2017.id, properties_2017.bathroomcnt, properties_2017.bedroomcnt, calculatedfinishedsquarefeet, fips, latitude, longitude, lotsizesquarefeet, properties_2017.propertylandusetypeid, rawcensustractandblock,
+ regionidcity, regionidcounty, regionidzip, roomcnt, yearbuilt, structuretaxvaluedollarcnt,
+ taxvaluedollarcnt, assessmentyear, landtaxvaluedollarcnt, taxamount, logerror, transactiondate, last_trans_date
+        FROM properties_2017
+        LEFT OUTER JOIN airconditioningtype 
+        ON airconditioningtype.airconditioningtypeid = properties_2017.airconditioningtypeid
+        LEFT OUTER JOIN architecturalstyletype
+        ON architecturalstyletype.architecturalstyletypeid = properties_2017.architecturalstyletypeid
+        LEFT OUTER JOIN buildingclasstype 
+        ON buildingclasstype.buildingclasstypeid = properties_2017.buildingclasstypeid
+        LEFT OUTER JOIN heatingorsystemtype
+        ON heatingorsystemtype.heatingorsystemtypeid = properties_2017.heatingorsystemtypeid
+        LEFT OUTER JOIN predictions_2017
+        ON predictions_2017.id = properties_2017.id
+        INNER JOIN (
+        SELECT id, MAX(transactiondate) as last_trans_date 
+        FROM predictions_2017
+        GROUP BY id
+        ) predictions ON predictions.id = properties_2017.id AND predictions_2017.transactiondate = predictions.last_trans_date
+        LEFT OUTER JOIN propertylandusetype
+        ON propertylandusetype.propertylandusetypeid = properties_2017.propertylandusetypeid
+        LEFT OUTER JOIN storytype
+        ON storytype.storytypeid = properties_2017.storytypeid
+        LEFT OUTER JOIN typeconstructiontype
+        ON typeconstructiontype.typeconstructiontypeid = properties_2017.typeconstructiontypeid
+        JOIN unique_properties
+        ON unique_properties.parcelid = properties_2017.parcelid
+        WHERE latitude IS NOT NULL and longitude IS NOT NULL
+        AND properties_2017.calculatedfinishedsquarefeet > 350 
+        AND properties_2017.bathroomcnt > 0
+        AND properties_2017.bedroomcnt > 0; 
         '''
         df = pd.read_sql(sql, conn)
 
