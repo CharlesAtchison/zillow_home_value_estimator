@@ -138,8 +138,39 @@ def create_cluster(df, X, k, col_name = None):
     else:
         df[col_name] = kmeans.predict(X_scaled)
 
+def create_scatterplots(X_scaled, cn= 'column_one', c2= 'column_two'):
+    fig, axs = plt.subplots(2, 2, figsize=(10, 10), sharex=True, sharey=True)
+    for ax, k in zip(axs.ravel(), range(2, 6)):
+        clusters = KMeans(k).fit(X_scaled).predict(X_scaled)
+        ax.scatter(X_scaled[cn], X_scaled[c2], c=clusters)
+        ax.set(title=f'k = {k}', xlabel=cn, ylabel=c2)
+
+
 def train_validate_test_split(df):
     train_and_validate, test = train_test_split(df, train_size=0.8, random_state=123)
     train, validate = train_test_split(train_and_validate, train_size=0.75, random_state=123)
 
     return train, validate, test
+
+
+def create_cluster(df, X, k, col_name = None):
+    
+    ''' 
+    This function takes in df, X (dataframe with variables you want to cluster on) and k
+    It scales the X, calcuates the clusters and return train (with clusters), the Scaled dataframe,
+    the scaler and kmeans object and scaled centroids as a dataframe
+    '''
+    scaler = StandardScaler(copy=True).fit(X)
+    X_scaled = pd.DataFrame(scaler.transform(X), columns=X.columns.values).set_index([X.index.values])
+    kmeans = KMeans(n_clusters = k, random_state = 123)
+    kmeans.fit(X_scaled)
+    centroids_scaled = pd.DataFrame(kmeans.cluster_centers_, columns = list(X))
+    
+    if col_name == None:
+        #clusters on dataframe 
+        df[f'clusters_{k}'] = kmeans.predict(X_scaled)
+    else:
+        df[col_name] = kmeans.predict(X_scaled)
+    
+    
+    return df, X_scaled, scaler, kmeans, centroids_scaled
