@@ -262,13 +262,35 @@ We fail to reject null hypothesis. There is no relationship between `logerror` a
 <a name='cluster_1'></a>
 ### Cluster 1
 
+![cluster_1_k](images/cluster_1_k.png)
+
+
 ![cluster_1](images/cluster_1.png)
+
+
+![cluster_1_centroid](images/cluster_1_cent.png)
 
 <a name='cluster_2'></a>
 ### Cluster 2
 
+![cluster_1_k](images/cluster_2_k.png)
+
+
+![cluster_1](images/cluster_2.png)
+
+
+![cluster_1_centroid](images/cluster_2_cent.png)
+
 <a name='cluster_3'></a>
 ### Cluster 3
+
+![cluster_1_k](images/cluster_3_k.png)
+
+
+![cluster_1](images/cluster_3.png)
+
+
+![cluster_1_centroid](images/cluster_3_cent.png)
 
 <a name='delivery'></a>
 ## Project Delivery
