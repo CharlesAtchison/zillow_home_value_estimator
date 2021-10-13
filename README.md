@@ -139,11 +139,12 @@
 | logerror                     |   74244 |      0.0168669   |      0.171047  |    -4.65542     |     -0.0242413   |      0.00674558  |      0.0394171   |      5.263       |
 
 <a name='acquire_takeaways'></a>
-### Acquire Takeaways
-> - Wrote a SQL query to acquire telco from Codeup Database.
-> - Using `acquire.py` we will create and cache the created CSV file if it doesn't exist, otherwise it will return the file.
-> - There are 7043 rows and 21 columns within the inital data query.
-> - The `customer_id`column doesn't offer any insight into customer churn, as each observation contains a unique id, so we will drop this column.
+### Takeaways from Acquire:
+
+> - Target variable: `logerror`
+> - This dataframe has 74,244 rows and 23 columns
+> - The dataset has 162,235 missing values
+> - There are 2 `object` based dtypes.
 
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
 <hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
@@ -151,43 +152,14 @@
 <a name='prep_data'></a>
 ## Prepare Data
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ 🟢 **Prepare** ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
-
-<a name='distributions'></a>
-### Distributions
-
-![violinplots](images/violinplots.png)
+> - Utilized standard median fillna values method.
+> - Filtered for outliers above a `taxamount` of $5,000,000 and `bedroomcnt` & `bathroomcnt` greater than 1.
+> - Further scaled the data to min max values.
 
 <a name='prepare_takeaways'></a>
 ### Prepare Takeaways
-> - The column `total_charges` was formatted as a string (object) and needed to be as a float 64, there were 11 values that were blank. However, upon further inspection we could see that these were the ones with 0 tenure, meaning they were new customers and hadn't incurred a monthly bill yet, so I put their values to be 0.
-> - The distrubtion of `tenure` appears to be mostly uniformly distributed.
-> - `total_charges` has a J-shaped distribution.
-> - `monthly_charges` appears to have a biomodal distrubtion.
-> - Those who `churn` compose about 25% of the data.
-> - Data has been split into train, validate, and test datasets, stratifying my `churn` column.
-> - I changed the values for all non-int based columns into 1's and 0's so they could be used within the ML modeling. Below is the replacement key:
-
-```python
-replacement_key = {
-    'gender': {'Female': 0, 'Male': 1},
-    'partner': {'Yes': 1, 'No': 0},
-    'dependents': {'Yes': 1, 'No': 0},
-    'phone_service': {'Yes': 1, 'No': 0},
-    'multiple_lines': {'Yes': 1, 'No': 0, 'No phone service': 2},
-    'online_security': {'Yes': 1, 'No': 0, 'No internet service': 2},
-    'online_backup': {'Yes': 1, 'No': 0, 'No internet service': 2},
-    'device_protection': {'Yes': 1, 'No': 0, 'No internet service': 2},
-    'tech_support': {'Yes': 1, 'No': 0, 'No internet service': 2},
-    'streaming_tv': {'Yes': 1, 'No': 0, 'No internet service': 2},
-    'streaming_movies': {'Yes': 1, 'No': 0, 'No internet service': 2},
-    'paperless_billing': {'Yes': 1, 'No': 0},
-    'churn': {'Yes': 1, 'No': 0},
-    'contract_type': {'Two year': 0, 'One year': 1, 'Month-to-month': 2},
-    'internet_service_type': {'DSL': 0, 'Fiber optic': 1, 'None': 2},
-    'payment_type': {'Mailed check': 0, 'Credit card (automatic)': 1,
-                     'Bank transfer (automatic)': 2, 'Electronic check': 3}
-```
-
+> - The data is now prepared to be input into the explore aspects of the data pipeline to evaluate what features we should use to potentially cluster.
+> - We dropped all other columns that had a high quantity of null values.
                      
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
 <hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
@@ -232,8 +204,8 @@ replacement_key = {
 
 <a name='explore_takeaways'></a>
 ### Explore Takeaways
-> - Examining the correlation between `churn` and each column, we can see that `contract_type`, `tenure`, `online_security`, `tech_support`, `online_backup`, `device_protection`, `device_protection`, `payment_type` are the some of the most correlated columns. 
-> - Feeding all columns into my models and seeing which one will be the most accurate seems the best course of action, particularly using combinatorics to determine the best performing model.
+> - It is apparent that the most correlated features with the `logerror` are `yearbuilt`, `structuretaxvaluedollarcnt`, `bathroomcnt`. 
+> - The best features from the feature engineering aspect were `bathroomcnt`, `yearbuilt` & `assessmentyear`.
 
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
 <hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
