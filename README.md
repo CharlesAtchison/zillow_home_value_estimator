@@ -64,6 +64,9 @@
 > - Abstract the functions to sub python scripts to have a clean presentation.
 > - Ensure the project is easily reproducable 
 
+### Findings
+> - All (4) hypotheses rejected the Null Hypotheses
+
 
 
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
@@ -258,6 +261,8 @@ We fail to reject null hypothesis. There is no relationship between `logerror` a
 
 <a name='cluster_1'></a>
 ### Cluster 1
+
+![cluster_1](images/cluster_1.png)
 
 <a name='cluster_2'></a>
 ### Cluster 2
