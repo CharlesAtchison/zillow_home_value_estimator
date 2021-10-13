@@ -1,8 +1,8 @@
-<center><h1>Zillow Home Value Estimation Project</h1></center>
+<center><h1>Zillow: What is driving the error is the Zestimates?</h1></center>
 
 <a name ='toc'></a>
 # Table of Contents 
-1. [Project Summary](#project_summary)
+1. [Project Planning](#project_planning)
     1. [Project Objectives](#project_objectives)
     2. [Business Goals](#business_goals)
     3. [Audience](#audience)
@@ -34,15 +34,16 @@
 
 <hr style="border-top: 10px groove tan; margin-top: 5px; margin-bottom: 5px"></hr>
 
-<a name='project_summary'></a>
-## Project Summary
+<a name='project_planning'></a>
+## Project Planning
+✓ 🟢 **Plan** ➜ ☐ _Acquire_ ➜ ☐ _Prepare_ ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
 <a name='project_objectives'></a>
 ### Project Objectives 
-> - Create a verbal presentation with supporting slides to summarize findings about single unit property values between May-August 2017.
-> - Create a Juypter Notebook that can create predictive models and estimate a property's assessed value.
+> - For this project you will continue working with the zillow dataset. Continue to use the 2017 properties and predictions data for single unit / single family homes.
+> - In addition to continuing work on your previous project, you should incorporate clustering methodologies on this project.
 > - Any abstracted modules that are created to make the presentation more clean, during the acquistion and preparation of data.
-> - Notebook walkthrough and presentation with a high-level overview of the entire project.
+> - The presentation will consist of a notebook demo of the discoveries you made and work you have done related to uncovering what the drivers of the error in the zestimate is.
 
 <a name='business_goals'></a>
 ### Business Goals 
@@ -52,13 +53,12 @@
 
 <a name='audience'></a>
 ### Audience 
-> - Target audience is the Codeup Data Science Team.
-
+> - Your audience for this project is a data science team. 
 <a name='deliverables'></a>
 ### Deliverables
-> - A presentation and supporting slides, no longer than 5 minutes.
-> - A github repositiory containing your work.
-> - A final Juypter Notebook that walks through the pipeline. 
+> - A clearly named final notebook. This notebook will be what you present and should contain plenty of markdown documentation and cleaned up code.
+> - A README that explains what the project is, how to reproduce you work, and your notes from project planning.
+> - A Python module or modules that automate the data acquisistion and preparation process. These modules should be imported and used in your final notebook.
 
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
 <hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
@@ -72,6 +72,7 @@
 
 <a name='acquire'></a>
 ## Acquire Data
+✓ _Plan_ ➜ 🟢 **Acquire** ➜ ☐ _Prepare_ ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
 <a name='data_dict'></a>
 ### Data Dictionary
@@ -146,6 +147,7 @@
 
 <a name='prep_data'></a>
 ## Prepare Data
+✓ _Plan_ ➜ ✓ _Acquire_ ➜ 🟢 **Prepare** ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
 <a name='distributions'></a>
 ### Distributions
@@ -190,35 +192,36 @@ replacement_key = {
 
 <a name='explore'></a>
 ## Explore Data
+✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ 🟢 **Explore** ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
 <a name='correlations'></a>
 ### Correlations
 
-![heatmap](images/heatmap.png)
+![heatmap](images/logerror_corr.png)
 
-#### Correlations with Churn
-|Column Name|       churn |
-|:----------------------|------------:|
-| tenure                | -0.352282   |
-| online_security       | -0.334429   |
-| tech_support          | -0.33423    |
-| online_backup         | -0.286061   |
-| device_protection     | -0.276515   |
-| total_charges         | -0.201972   |
-| streaming_movies      | -0.201724   |
-| streaming_tv          | -0.195773   |
-| dependents            | -0.160315   |
-| partner               | -0.137696   |
-| internet_service_type | -0.0438973  |
-| gender                |  0.00688456 |
-| phone_service         |  0.0119954  |
-| multiple_lines        |  0.020509   |
-| senior_citizen        |  0.165482   |
-| paperless_billing     |  0.187409   |
-| monthly_charges       |  0.18904    |
-| payment_type          |  0.235395   |
-| contract_type         |  0.396156   |
-| churn                 |  1          |
+#### Correlations of Logerror
+|  Column Name |     logerror |
+|:-----------------------------|-------------:|
+| bathroomcnt                  |  0.00474117  |
+| id                           |  0.00447373  |
+| regionidcounty               |  0.00292009  |
+| rawcensustractandblock       |  0.00269419  |
+| fips                         |  0.00269152  |
+| roomcnt                      |  0.00199583  |
+| latitude                     |  0.00182852  |
+| bedroomcnt                   |  0.00125381  |
+| calculatedfinishedsquarefeet | -0.000362524 |
+| regionidzip                  | -0.000494803 |
+| propertylandusetypeid        | -0.00150166  |
+| lotsizesquarefeet            | -0.00249514  |
+| assessmentyear               | -0.00295415  |
+| longitude                    | -0.00302902  |
+| landtaxvaluedollarcnt        | -0.00305275  |
+| regionidcity                 | -0.00402482  |
+| taxamount                    | -0.0042753   |
+| taxvaluedollarcnt            | -0.00445937  |
+| structuretaxvaluedollarcnt   | -0.00542311  |
+| yearbuilt                    | -0.00712105  |
 
 <a name='pairplot'></a>
 ### Pair Plot
@@ -232,87 +235,59 @@ replacement_key = {
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
 <hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
 
-<a name='stat_testing'></a>
-## Statistical Testing
-
 <a name='hypothesis'></a>
-### Hypothesis
-> - __alpha = .025__ (divide .05 by two since it is a single-tail)
-> - ${H}_{o}$: `payment_type` of 'Electronic check' has a __lower or equal__ churn rate than other `payment_type`.
-> - ${H}_{a}$: `payment_type` of 'Electronic check' has a __higher__ churn rate than other `payment_type`.
+### Hypothesis 1 Correlation Test `logerror` vs `id`
+> - ${H}_{0}$: There is no correlation between `logerror` and `id`
+> - ${H}_{a}$: There is a correlation between `logerror` and `id`
 
+__r-value__: 0.00177
 
-<a name='conclusion'></a>
-### Conclusion
-> - We reject the null hypothesis due to a p_value less than .025 and t_stat is 17.92, and can state the the `payment_type` of 'Electronic check' has a significantly higher `churn` than other `payment_types`
+__p-value__: 0.76129
 
-<a name='stat_takeaway'></a>
-### Takeaway
-> - `payment_type` will be a useful feature for modeling.
+We fail to reject null hypothesis. There is no relationship between `logerror` and `id`
 
-<div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
-<hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
+### Hypothesis 2 Correlation Test `logerror` vs `bathroomcnt`
+> - ${H}_{0}$: There is no correlation between `logerror` and `bathroomcnt`
+> - ${H}_{a}$: There is a correlation between `logerror` and `bathroomcnt`
+
+__r-value__: 0.00354
+
+__p-value__: 0.54214
+
+We fail to reject null hypothesis. There is no relationship between `logerror` and `bathroomcnt`
+
+### Hypothesis 3 Correlation Test `logerror` vs `bedroomcnt`
+> - ${H}_{0}$: There is no correlation between `logerror` and `bedroomcnt`
+> - ${H}_{a}$: There is a correlation between `logerror` and `bedroomcnt`
+
+__r-value__: 0.00261
+
+__p-value__: 0.65306
+
+We fail to reject null hypothesis. There is no relationship between `logerror` and `bedroomcnt`
+
+### Hypothesis 4 Correlation Test `logerror` vs `calculatedfinishedsquarefeet`
+> - ${H}_{0}$: There is no correlation between `logerror` and `calculatedfinishedsquarefeet`
+> - ${H}_{a}$: There is a correlation between `logerror` and `calculatedfinishedsquarefeet`
+
+__r-value__: 0.00126
+
+__p-value__: 0.82831
+
+We fail to reject null hypothesis. There is no relationship between `logerror` and `calculatedfinishedsquarefeet`
+
 
 <a name='modeling'></a>
 ## Modeling & Evaluation
+✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ ✓ _Explore_ ➜ 🟢 **Model** ➜ ☐ _Deliver_
 
-<a name='baseline'></a>
-### Baseline Accuracy
-> - Baseline accuracy is 73%, so goal is to beat 73%.
+<a name='delivery'></a>
+## Project Delivery
+✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ ✓ _Explore_ ➜ ✓ _Model_ ➜ 🟢 **Deliver**
 
-<a name='feature_eng'></a>
-### Feature Engineering
-> - After iterating though all 4 models using all combinations of features the most accurate without hyperparameter optimization are:
-```python
-most_accurate_comb = ('gender', 'senior_citizen', 'dependents', 'tenure', 'phone_service','online_security',
-'online_backup', 'device_protection', 'paperless_billing', 'monthly_charges',
-'total_charges', 'contract_type', 'internet_service_type', 'payment_type')
-```
-
-<a name='mvp'></a>
-### Minimum Viable Product Model
-> - Utilizing Logistic Regression, Decision Tree, Random Forest, and K-Nearest Neighbors with the above noted features due to feature engineering.
-> - Goal is to beat baseline accuracy of 73%.
-> - Function `most_accurate_attributes` tested all combinations of features with all 4 models to provide the most consistently accurate ones with the best model.
-
-
-<a name='hyp_opt'></a>
-### Hyperparameter Optimization
-
-![hyperparameter_optimization](images/hyperparameter_opt.png)
-
-#### Train
-
-|              |   precision |   recall |   f1-score |    support |
-|:-------------|------------:|---------:|-----------:|-----------:|
-| 0            |    0.848606 | 0.882292 |   0.865121 | 2897       |
-| 1            |    0.633727 | 0.564054 |   0.596864 | 1046       |
-| accuracy     |    0.79787  | 0.79787  |   0.79787  |    0.79787 |
-| macro avg    |    0.741166 | 0.723173 |   0.730992 | 3943       |
-| weighted avg |    0.791603 | 0.79787  |   0.793958 | 3943       |
-
-
-#### Validate
-
-|              |   precision |   recall |   f1-score |     support |
-|:-------------|------------:|---------:|-----------:|------------:|
-| 0            |    0.840246 | 0.880837 |   0.860063 | 1242        |
-| 1            |    0.619537 | 0.536748 |   0.575179 |  449        |
-| accuracy     |    0.789474 | 0.789474 |   0.789474 |    0.789474 |
-| macro avg    |    0.729892 | 0.708793 |   0.717621 | 1691        |
-| weighted avg |    0.781643 | 0.789474 |   0.78442  | 1691        |
-
-<a name='test_best'></a>
-### Test Best Model
-> - Only using the best performing model to test against the test dataset to maintain the highest accuracy.
-
-<a name='csv'></a>
-### Create Predictions via CSV
-> - Create a CSV file with probabilty of class, prediction of churn (1=churn, 0=not_churn)
-> - These predictions are derived from the Logistic Regression model
 
 <a name='conclusions'></a>
-### Conclusions and Next Steps
+## Conclusions & Next Steps
 
 > - I found that most of the models weren't to different in their accuracy, even with hyperparameter optimization and feature engineering.
 > - If I had more time to work on this project, I'd continue doing more feature engineering and hyperparameter optmization. 
