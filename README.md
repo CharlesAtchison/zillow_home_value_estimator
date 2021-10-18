@@ -20,9 +20,11 @@
     2. [Pairplot](#pairplot)
     3. [Explore Takeaways](#explore_takeaways)
 6. [Hypothesis](#hypothesis)
-    2. [Conclusion](#hyp_conclusion)
+    1. [Conclusion](#hyp_conclusion)
 7. [Modeling & Evaluation](#modeling)
-    7. [Conclusions & Next Steps](#conclusions)
+    1. [Cluster 1](#cluster_1)
+    2. [Cluster 2](#cluster_2)
+    3. [Cluster 3](#cluster_3)
 
 <hr style="border-top: 10px groove tan; margin-top: 5px; margin-bottom: 5px"></hr>
 
@@ -296,12 +298,6 @@ We fail to reject null hypothesis. There is no relationship between `logerror` a
 ## Project Delivery
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ ✓ _Explore_ ➜ ✓ _Model_ ➜ 🟢 **Deliver**
 
-
-<a name='conclusions'></a>
-## Conclusions & Next Steps
-
-> - I found that most of the models weren't to different in their accuracy, even with hyperparameter optimization and feature engineering.
-> - If I had more time to work on this project, I'd continue doing more feature engineering and hyperparameter optmization. 
 
 <div style="text-align: right"><a href='#toc'>Table of Contents</a></div>
 <hr style="border-top: 10px groove tan; margin-top: 1px; margin-bottom: 1px"></hr>
